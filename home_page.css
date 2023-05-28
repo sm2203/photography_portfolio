@@ -1,0 +1,58 @@
+/* home_page.css */
+body {
+    margin: 0;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    color: #c820c0 ;
+    background-color: #FFB3FB ;
+    font-family: Arial, sans-serif;
+  }
+
+header {
+    display: flex ;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #FFB3FB;
+}
+
+.logo img {
+    height: 100px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 10px;
+  }
+
+.icon-social-media {
+    height: 200px;
+    color: #333333;
+    transition: color 0.2s;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.icon-social-media:hover {
+    color: #aaaaaa;
+}
+
+.image-container {
+    column-count: 2; /* Adjust the number of columns as needed */
+    column-gap: 20px; /* Adjust the gap between columns as needed */
+}
+
+.image-container img {
+    display: block;
+    max-width: 10%;
+    max-height: 100px;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 20px; /* Adjust the margin between images as needed */
+}
