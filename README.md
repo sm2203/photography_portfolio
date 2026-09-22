@@ -1,5 +1,5 @@
 # photography_portfolio
-WIP: This is my first attempt at learning HTML/CSS and creating a webpage for my photography portfolio.
+This is my first attempt at learning HTML/CSS and creating a webpage for my photography portfolio.
 
 ## Notes
 - The page uses a one-page scrolling layout with Home, About, and Portfolio sections.
