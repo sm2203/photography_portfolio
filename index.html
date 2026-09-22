@@ -1,54 +1,119 @@
-<!DOCTYPE html> <!--to specify it is an HTML5 document-->
-<html lang="en"> <!--wraps all the content on html page-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="home_page.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--vieport meta tage helps make the web page responsive on different devices-->
-    <title> Shreya's Photography Portfolio </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreya's Photography Portfolio</title>
+    <link rel="stylesheet" href="home_page.css">
 </head>
 
-
-
 <body>
-<!-- Your HTML main content goes here -->
+    <!-- Header: sticky top navigation with logo and social links -->
     <header>
-
         <div class="logo">
-            <a href="#"><img src="Images/web-logo.png" alt = "Logo"></a>
+            <a href="#home"><img src="images/web-logo.png" alt="Shreya's logo"></a>
         </div>
 
         <nav>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Portfolio</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
             </ul>
         </nav>
 
-        <div >
-            <a class = "icon-social-media" href="https://instagram.com/shr9ya" target="_blank">
+        <div class="social-links">
+            <a class="icon-social-media" href="https://instagram.com/shr9ya" target="_blank" aria-label="Instagram">
                 <ion-icon name="logo-instagram"></ion-icon>
             </a>
-            <a class = "icon-social-media" href="mailto:shreyadm12@gmail.com" target="_blank">
+            <a class="icon-social-media" href="mailto:shreyadm12@gmail.com" target="_blank" aria-label="Email">
                 <ion-icon name="mail-outline"></ion-icon>
             </a>
             <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         </div>
-
-
     </header>
 
-    <div class=""image-container">
-        <img src="images/img_01.jpeg" alt="Image 1">
-        <img src="images/img_02.jpeg" alt="Image 2">
-        <img src="images/img_03.jpeg" alt="Image 3">
-        <img src="images/img_04.jpeg" alt="Image 4">
-        <img src="images/img_05.jpeg" alt="Image 5">
-        <img src="images/img_06.jpeg" alt="Image 6">
-        <img src="images/img_07.jpeg" alt="Image 7">
-    </div>
-    
+    <main>
+        <!-- Hero section: introduction and featured image -->
+        <section id="home" class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Photographer</p>
+                <h1>Shreya's Photography Portfolio</h1>
+                <p>Capturing moments, stories, and everyday beauty through my film camera.</p>
+                <a class="button" href="#portfolio">View Portfolio</a>
+            </div>
 
+            <div class="hero-image">
+                <img src="images/img_11.jpg" alt="Featured photography image">
+            </div>
+        </section>
+
+        <!-- About section: short bio and story -->
+        <section id="about" class="content-section about-section">
+            <div class="section-heading">
+                <p class="eyebrow">About</p>
+                <h2>Storytelling through the lens</h2>
+            </div>
+            <p>I’m a amateur who loves photography with a love for nature, landscapes and playing with light and my surroundings that make a moment unforgettable.</p>
+            <p>My work blends the art of film photography that makes me pause and capture moments that feels personal, warm, and timeless.</p>
+        </section>
+
+        <!-- Portfolio section: image grid and lightbox modal -->
+        <section id="portfolio" class="content-section portfolio-section">
+            <div class="section-heading">
+                <p class="eyebrow">Portfolio</p>
+                <h2>Selected work</h2>
+            </div>
+
+            <div class="image-container" id="gallery"></div>
+
+            <div id="lightbox" class="lightbox hidden" aria-label="Image preview">
+                <button class="lightbox-close" id="close-lightbox" aria-label="Close image preview">×</button>
+                <img id="lightbox-image" src="" alt="Expanded portfolio image">
+            </div>
+
+            <script>
+            async function loadGallery() {
+                const gallery = document.getElementById("gallery");
+                const lightbox = document.getElementById("lightbox");
+                const lightboxImage = document.getElementById("lightbox-image");
+                const closeButton = document.getElementById("close-lightbox");
+
+                const response = await fetch("images/photos.json");
+                const files = await response.json();
+                
+                files
+                    .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file))
+                    .forEach(file => {
+                        const img = document.createElement("img");
+                        img.src = "images/" + file;
+                        img.alt = file;
+                        img.loading = "lazy";
+
+                        img.addEventListener("click", () => {
+                            lightboxImage.src = img.src;
+                            lightbox.classList.remove("hidden");
+                        });
+
+                        gallery.appendChild(img);
+                    });
+
+                closeButton.addEventListener("click", () => {
+                    lightbox.classList.add("hidden");
+                });
+
+                lightbox.addEventListener("click", (event) => {
+                    if (event.target === lightbox) {
+                        lightbox.classList.add("hidden");
+                    }
+                });
+            }
+
+            loadGallery();
+            </script>
+        </section>
+    </main>
 </body>
 </html>
+
